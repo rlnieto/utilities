@@ -5,16 +5,17 @@
 # Lee un fichero XML y lo divide en N ficheros usando como delimitador
 # el tag introducido como parámetro y su cierre
 #
-#
+# Los ficheros de salida tendrán nombres correlativos (fichero_salida0.txt,
+# fichero_salida1.txt...)
 #------------------------------------------------------------------------------
 import sys
 
-mensaje_ayuda = '\nDivide un fichero XML en sus entidades. Uso: {0} fichero_entrada tag_delimitador\n\n'.format(sys.argv[0].split('.')[0])
+MENSAJE_AYUDA = '\nDivide un fichero XML en sus entidades. Uso: {0} fichero_entrada tag_delimitador\n\n'.format(sys.argv[0].split('.')[0])
 
 # Entrada: fichero a descomponer y tag a utilizar. Genera tantos ficheros como
 # entidades empicen y terminen con ese tag
 if len(sys.argv) != 3:
-    print (mensaje_ayuda)
+    print (MENSAJE_AYUDA)
     sys.exit(1)
 
 FICHERO_ENTRADA = sys.argv[1]
