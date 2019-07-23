@@ -53,6 +53,6 @@ for linea in infile:
         contenido_fichero.append(linea)
         #print(linea)
 
-print(contenido_fichero)
-
 infile.close()
+
+print('\nProceso finalizado!\n')
