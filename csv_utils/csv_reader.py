@@ -23,6 +23,6 @@ with open('Turquia.csv', newline='') as File:
 
         total += importe  # para que funcione con cualquier separador
 
-    print('\nEncontrados un total de {0} pedidos que suman: {1}'.format(str(contador_pedidos), str(total_pedidos)))
-    print('Encontradas un total de {0} devoluciones que suman: {1}\n'.format(str(contador_devos), str(total_devos)))
-    print('Total importes: {0}\n'.format(str(total)))
+    print('\nEncontrados un total de {0} items que suman: {1}'.format(str(contador_pedidos), str(total_pedidos)))
+    print('Encontradas un total de {0} items que suman: {1}\n'.format(str(contador_devos), str(total_devos)))
+    print('Total importes pedidos - devos: {0}\n'.format(str(total)))
