@@ -10,6 +10,8 @@ import sys
 import re
 import os.path as path
 
+MENSAJE_AYUDA = '\nFormatea un fichero XML generado por SIMPA en varias líneas. Uso: {0} fichero_entrada\n\n'.format(sys.argv[0].split('.')[0])
+
 #---------------------------------------------------------------------------------
 #  extraer_xml
 #
@@ -23,19 +25,24 @@ def extraer_xml(fichero_entrada):
         sys.exit(1)
 
     # El fichero existe => lo formateamos en varias líneas
-    MENSAJE_AYUDA = '\nFormatea un fichero XML generado por SIMPA en varias líneas. Uso: {0} fichero_entrada\n\n'.format(sys.argv[0].split('.')[0])
-    PATRON_TAG_XML = '([\t]*)(<.[^(><.)]+>)'   # tag de apertura seguido de cualquier cosa que no sea un tag de cierre y apertura de un nuevo tag
+    #PATRON_TAG_XML = '([\t]*)(<.[^(><.)]+>)'   # tag de apertura seguido de cualquier cosa que no sea un tag de cierre y apertura de un nuevo tag
+    PATRON_TAG_XML = '([\t]*)(<[0-9a-zA-Z\/\"-_=\s\t\.]+>)'   # tag de apertura seguido de cualquier cosa que no sea un tag de cierre y apertura de un nuevo tag
+
+#<PAYMENT code="1" payment_entity_id="70155" amount="299000.00" bank_reference="f1760280-7c70-48a7-bfc5-5318ec00e8b5" description="VISA" card_bin="459356" card_last4="3131" installments="0">
+#<AUXILIARY_FIELD key="FISCAL_ID_TYPE" value="1"/>
+
 
     patron = re.compile(PATRON_TAG_XML)
     datos_salida = []
 
 
     # Leemos el fichero
-    infile = open(FICHERO_ENTRADA, "r")
+    infile = open(FICHERO_ENTRADA, mode='r', encoding='utf-8')
     contenido_fichero = infile.read().split('\\n')   # es sólo una línea
 
     for linea in contenido_fichero:
         linea_formateada = linea.replace('\\t', '\t').replace('\\"', '"')
+        print(linea_formateada)
 
         # Pintamos la línea si tiene un tag XML. TODO: econtrar un método más eficiente??
         tags = patron.match(linea_formateada)
@@ -57,7 +64,7 @@ def extraer_xml(fichero_entrada):
 #  OJO: si el fichero de salida existe, LO SOBREESCRIBE
 #---------------------------------------------------------------------------------
 def lista_a_fichero(lista, fichero_salida):
-    fout = open(fichero_salida, "w")
+    fout = open(fichero_salida, 'w', encoding='utf-8')
 
     for linea in datos_salida:
         fout.write(linea + '\n')
